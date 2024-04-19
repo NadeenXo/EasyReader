@@ -1,0 +1,39 @@
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333333;
+    background-color: #ffffff;
+}
+
+/* Heading styles */
+h1 {
+    font-size: 24px; /* Larger font size for h1 */
+    color: #0066cc; /* Blue color for h1 */
+}
+
+h2 {
+    font-size: 20px; /* Medium font size for h2 */
+    color: #0066cc; /* Blue color for h2 */
+}
+
+h3 {
+    font-size: 18px; /* Smaller font size for h3 */
+    color: #0066cc; /* Blue color for h3 */
+}
+
+/* Paragraph styles */
+p {
+    font-size: 16px; /* Font size for paragraphs */
+    color: #333333; /* Text color for paragraphs */
+}
+
+/* Link styles */
+a {
+    color: #0099ff; /* Green color for links */
+    text-decoration: none; /* Remove underline from links */
+}
+
+/* Additional styles */
+/* Add your additional CSS styles here */
