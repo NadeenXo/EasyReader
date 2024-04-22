@@ -1,83 +1,10 @@
 package com.example.easyreader
-//
-//import androidx.appcompat.app.AppCompatActivity
-//import android.os.Bundle
-//import android.webkit.WebSettings
-//import android.webkit.WebView
-//import java.io.File
-//import java.util.zip.ZipEntry
-//import java.util.zip.ZipInputStream
-//class MainActivity : AppCompatActivity() {
-//    private lateinit var webView: WebView
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-//
-//        webView = findViewById(R.id.webView)
-//        val webSettings: WebSettings = webView.settings
-//        webSettings.javaScriptEnabled = true
-//
-//        // Access the ePub file from resources using its resource ID
-//        val epubFileResId = R.raw.q1
-//        val epubFile = File(filesDir, "q1.epub") // Copy the ePub file to internal storage
-//        copyRawResourceToFile(epubFileResId, epubFile)
-//
-//        // Access the CSS file from resources using its resource ID
-//        val cssFileResId = R.raw.styles
-//        val cssFile = File(filesDir, "styles.css") // Copy the CSS file to internal storage
-//        copyRawResourceToFile(cssFileResId, cssFile)
-//
-//        val htmlContent = extractAndReadEpub(epubFile)
-//        applyCssStyling(htmlContent, cssFile)
-//    }
-//
-//    private fun copyRawResourceToFile(resourceId: Int, outputFile: File) {
-//        resources.openRawResource(resourceId).use { inputStream ->
-//            outputFile.outputStream().use { outputStream ->
-//                inputStream.copyTo(outputStream)
-//            }
-//        }
-//    }
-//
-//    private fun extractAndReadEpub(epubFile: File): String {
-//        val htmlContent = StringBuilder()
-//
-//        try {
-//            ZipInputStream(epubFile.inputStream()).use { zipInputStream ->
-//                var zipEntry: ZipEntry? = zipInputStream.nextEntry
-//                while (zipEntry != null) {
-//                    val entryName = zipEntry.name
-//
-//                    if (!zipEntry.isDirectory && entryName.endsWith(".html")) {
-//                        htmlContent.append(zipInputStream.reader().readText())
-//                    }
-//
-//                    zipInputStream.closeEntry()
-//                    zipEntry = zipInputStream.nextEntry
-//                }
-//            }
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//
-//        return htmlContent.toString()
-//    }
-//
-//    private fun applyCssStyling(htmlContent: String, cssFile: File) {
-//        val styledHtml =
-//            "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/styles.css\" /></head><body>$htmlContent</body></html>"
-//        webView.loadDataWithBaseURL(null, styledHtml, "text/html", "UTF-8", null)
-//    }
-//}
-
 
 import android.os.Bundle
-import android.webkit.WebChromeClient
+import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.easyreader.R
 import java.io.File
 import java.io.FileInputStream
 import java.util.zip.ZipEntry
@@ -93,6 +20,18 @@ class MainActivity : AppCompatActivity() {
         webView = findViewById(R.id.webView)
         val webSettings: WebSettings = webView.settings
         webSettings.javaScriptEnabled = true
+
+        //////////////////////////////
+        // Enable zoom controls
+        // Disable built-in zoom controls
+        webSettings.setSupportZoom(false)
+        webSettings.builtInZoomControls = false
+        webSettings.displayZoomControls = false // Hide the default zoom controls
+
+        // Set initial zoom level (optional)
+        webSettings.textZoom = 100 // 100% initial zoom level
+
+/////////////////
 
         // Access the ePub file from resources using its resource ID
         val epubFileResId = R.raw.q1
@@ -123,10 +62,28 @@ class MainActivity : AppCompatActivity() {
 //                    // Execute JavaScript after the WebView has finished loading
 //                    webView.evaluateJavascript(scrollToSectionScript, null)
 //                }
-//            }
+//            }.
 //        }
 
+
     }
+    fun zoomInText() {
+        webView.settings.textZoom += 10 // Increase text zoom by 10%
+    }
+
+    fun zoomOutText() {
+        webView.settings.textZoom -= 10 // Decrease text zoom by 10%
+    }
+
+    fun zoomIn(view: View) {
+        zoomInText()
+    }
+
+    fun zoomOut(view: View) {
+        zoomOutText()
+    }
+
+
 
     private fun copyRawResourceToFile(resourceId: Int, outputFile: File) {
         resources.openRawResource(resourceId).use { inputStream ->
