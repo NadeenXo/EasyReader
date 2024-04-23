@@ -70,11 +70,9 @@ class MainActivity : AppCompatActivity() {
     fun zoomInText() {
         webView.settings.textZoom += 10 // Increase text zoom by 10%
     }
-
     fun zoomOutText() {
         webView.settings.textZoom -= 10 // Decrease text zoom by 10%
     }
-
     fun zoomIn(view: View) {
         zoomInText()
     }
